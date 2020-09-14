@@ -1,0 +1,49 @@
+schema-version: 1.0
+
+pack:
+  origin: aws-jdk
+  alias: jdk
+  var:
+    version: "{% jdkVersion %}"
+
+const:
+  catalinaHome: "{% installDir %}/apache-tomcat-{% version %}"
+  webapps: "{% catalinaHome %}/webapps"
+
+var:
+  version: 9.0.43
+  httpPort: 8080
+  user: default
+  jdkVersion: 8
+  timeout: 5
+
+
+provision:
+  - url: https://downloads.apache.org/tomcat/tomcat-{{ majorVersion .pack.version }}/v{% version %}/bin/apache-tomcat-{% version %}.tar.gz
+  - env: CATALINA_HOME={% catalinaHome %}
+  - env: CATALINA_PID=/home/{% user %}/catalina.pid
+  - systempath: "{% catalinaHome %}/bin"
+  - permission:
+      path: "{% catalinaHome %}"
+      owner: "{% user %}"
+      recursive: true
+  - shell: "{{ .templates }}/port.sh"
+
+deploy:
+  - copy:
+      resource: webapps
+      topath: "{% catalinaHome %}/webapps"
+
+up: start
+down: stop
+
+port: "{% httpPort %}"
+user: "{% user %}"
+env: CATALINA_OPTS
+
+command:
+  start:
+    template: start.sh
+    condition: curl -I "localhost:{% httpPort %}"
+  stop: "{{ .templates }}/stop.sh"
+   
