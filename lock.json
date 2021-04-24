@@ -1,0 +1,13 @@
+{
+    "Ids": [
+        [
+            {
+                "origin": "https://github.com/xbeerepository/aws-jdk.git",
+                "alias": "jdk"
+            },
+            {
+                "version": "master"
+            }
+        ]
+    ]
+}

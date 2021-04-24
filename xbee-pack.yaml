@@ -34,16 +34,23 @@ deploy:
       resource: webapps
       topath: "{% catalinaHome %}/webapps"
 
-up: start
-down: stop
+up:
+  template: start.sh
+  condition: curl -I "localhost:{% httpPort %}"
+  user: "{% user %}"
 
+down:
+  template: stop.sh
+  user: "{% user %}"
+
+
+
+volume: webapps:"{% catalinaHome %}/webapps":.
 port: "{% httpPort %}"
 user: "{% user %}"
-env: CATALINA_OPTS
+
 
 command:
-  start:
-    template: start.sh
-    condition: curl -I "localhost:{% httpPort %}"
-  stop: "{{ .templates }}/stop.sh"
+  catalina: catalina.sh {{ .args }}
+ 
    
