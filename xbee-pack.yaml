@@ -29,11 +29,6 @@ provision:
       recursive: true
   - shell: "{{ .templates }}/port.sh"
 
-deploy:
-  - copy:
-      resource: webapps
-      topath: "{% catalinaHome %}/webapps"
-
 up:
   template: start.sh
   condition: curl -I "localhost:{% httpPort %}"
