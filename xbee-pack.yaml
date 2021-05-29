@@ -1,6 +1,6 @@
 schema-version: 1.0
 
-pack:
+dependency:
   origin: aws-jdk
   alias: jdk
   var:
