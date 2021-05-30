@@ -3,8 +3,6 @@ schema-version: 1.0
 dependency:
   origin: aws-jdk
   alias: jdk
-  var:
-    version: "{% jdkVersion %}"
 
 const:
   catalinaHome: "{% installDir %}/apache-tomcat-{% version %}"
@@ -14,7 +12,6 @@ var:
   version: 9.0.43
   httpPort: 8080
   user: default
-  jdkVersion: 8
   timeout: 5
 
 
