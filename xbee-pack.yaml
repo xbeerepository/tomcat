@@ -21,34 +21,34 @@ const:
 var:
   version: 9.0.43
   httpPort: 8080
-  user: default
   timeout: 5
 
 
 provision:
   - url: https://archive.apache.org/dist/tomcat/tomcat-{{ majorVersion .pack.version }}/v{% version %}/bin/apache-tomcat-{% version %}.tar.gz
   - env: CATALINA_HOME={% catalinaHome %}
-  - env: CATALINA_PID=/home/{% user %}/catalina.pid
+  - env: CATALINA_PID=/home/{% xbeeUser %}/catalina.pid
   - systempath: "{% catalinaHome %}/bin"
   - permission:
       path: "{% catalinaHome %}"
-      owner: "{% user %}"
+      owner: "{% xbeeUser %}"
       recursive: true
   - shell: "{{ .templates }}/port.sh"
 
 up:
   template: start.sh
   condition: curl -I "localhost:{% httpPort %}"
-  user: "{% user %}"
+  user: "{% xbeeUser %}"
 
 down:
   template: stop.sh
-  user: "{% user %}"
+  user: "{% xbeeUser %}"
 
 port: "{% httpPort %}"
-user: "{% user %}"
+
 
 command:
-  catalina: catalina.sh {{ .args }}
+  catalina:
+    cmd: catalina.sh {{ .args }}
  
    
