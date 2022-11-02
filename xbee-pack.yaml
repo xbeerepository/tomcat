@@ -35,7 +35,7 @@ provision:
   - shell: "{{ .templates }}/port.sh"
 
 up: catalina.sh start
-down: catalina.sh start
+down: catalina.sh stop
 
 
 port: "{% httpPort %}"
