@@ -21,12 +21,13 @@ const:
 in:
   version: 9.0.43
   httpPort: 8080
-
+  timeout: 30
 
 
 provision:
   - url: https://archive.apache.org/dist/tomcat/tomcat-{{ majorVersion .pack.version }}/v{% version %}/bin/apache-tomcat-{% version %}.tar.gz
   - env: CATALINA_HOME={% catalinaHome %}
+  - env: CATALINA_PID=/tmp/catalina.pid
   - systempath: "{% catalinaHome %}/bin"
   - permission:
       path: "{% catalinaHome %}"
@@ -35,7 +36,7 @@ provision:
   - shell: "{{ .templates }}/port.sh"
 
 up: catalina.sh start
-down: catalina.sh stop
+down: catalina.sh stop {% timeout %} -force 
 
 
 port: "{% httpPort %}"
