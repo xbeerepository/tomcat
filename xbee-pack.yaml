@@ -10,8 +10,6 @@ description: |
   Example: xbee register --in version=10.0.6 --in jdk.version=8 tomcat
            xbee catalina start
 
-require: ../xbee-debug
-
 dependency:
   origin: aws-jdk
   alias: jdk
