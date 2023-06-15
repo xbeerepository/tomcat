@@ -28,7 +28,7 @@ provision:
   - systempath: "/opt/apache-tomcat-{{ .version }}/bin"
   - permission:
       path: "/opt/apache-tomcat-{{ .version }}"
-      owner: "{{ .xbeeUser }}"
+      owner: "{{ .xbee.user }}"
       recursive: true
   - shell: "{{ .templates }}/port.sh"
 
