@@ -30,7 +30,7 @@ provision:
       path: "/opt/apache-tomcat-{{ .version }}"
       owner: "{{ .xbee.user }}"
       recursive: true
-  - shell: "{{ .templates }}/port.sh"
+  - shell: "{{ .xbee.templates }}/port.sh"
 
 up: catalina.sh start
 down: catalina.sh stop {{ .timeout }} -force
