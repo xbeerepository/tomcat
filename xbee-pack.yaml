@@ -31,6 +31,7 @@ provision:
       path: "/opt/apache-tomcat-{{ .xbee.version }}"
       owner: "{{ .xbee.user }}"
       recursive: true
+  - shell: rm -rf $CATALINA_HOME/webapps/*
 
 up: catalina.sh start
 down: catalina.sh stop {{ .timeout }} -force
