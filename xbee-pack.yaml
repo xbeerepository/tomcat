@@ -17,7 +17,7 @@ const:
 
 var:
   xbee:
-    version: 9.0.80
+    version: 11.0.22
 
   timeout: 30
 
@@ -42,5 +42,5 @@ port: "{{ .httpPort }}"
 
 command:
   catalina: catalina.sh {{ .args }}
- 
+
    
