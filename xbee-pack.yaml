@@ -14,13 +14,12 @@ dependency:
 
 const:
   httpPort: 8080
-  catalinaHome: "/opt/apache-tomcat-{{ .xbee.version }}"
+  catalinaHome: "{{ .xbee.install }}/apache-tomcat-{{ .xbee.version }}"
 
 var:
   xbee:
     version: 11.0.22
   timeout: 30
-
 
 provision:
   - url: https://archive.apache.org/dist/tomcat/tomcat-{{ majorVersion .xbee.version }}/v{{ .xbee.version }}/bin/apache-tomcat-{{ .xbee.version }}.tar.gz
